@@ -1,0 +1,94 @@
+
+# Getting and Cleaning Data Course Project's Codebook
+
+
+## About the source of the data
+
+This is Human Activity Recognition data collected from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensor. 
+
+Full description of the data <a href = "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones"> here</a> and the datasets <a href = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">here</a>
+
+## About the R script
+
+The purpose of this analysis was to collect, work with and clean the Human Recognition data. The run_analyis.R script therefore perfoms the following tasks; 
+Merges the training and the test sets to create one data set.
+
+1.Loads Packages 
+
+2.Downloads and unzips the datasets
+
+3.Reads and assign the datasets to variable  names and update column names
+
+* activity_lables.txt
+   + Datatable name ; activities
+   + Column name: "code", "activity" 
+* features.txt 
+   + Datatable name: features
+   + Column names: "n", "functions"
+* subject_test.txt
+   + Datatable name: subject_test
+   + Column names: subject
+* X_test.txt
+   + Datatable name: x_test
+   + Column names: imports names from features$functions
+* Y_test.txt
+   + Datatable name: x_test
+   + Column names: "code"
+* subject_train.txt
+   + Datatable name: subject_train
+   + Column names: subject
+* X_train.txt
+   + Datatable name: x_train
+   + Column names: imports names from features$functions
+* Y_train.txt
+   + Datatable name: x_train
+   + Column names: "code"
+   
+   
+4.Merges the training and the test sets to create one data set.
+
+* x is created by merging x_test and x_train using rbind() function.
+* y is created by merging y_test and y_train using rbind() function.
+* subject is created by merging subject_test and subject_train usining rbind() function. 
+* merged_data is created by merging subject, y and x using cbind() function. 
+
+
+5.Extracts only the measurements on the mean and standard deviation for each measurement. 
+
+* data is created by selecting columns that contains mean and standard deviation from merged_data, plus the subject and code column.
+
+
+6.Uses descriptive activity names to name the activities in the data set
+
+* Replaces the values in column code of data table dataset by lookingup and replacing  their descriptive names from the activities table
+
+7.Appropriately labels the data set with descriptive variable names. 
+
+* subject and activity Columns change to sentence case
+* replaces tBody with TimeBody
+* replaces Acc with Accelerometer 
+* replaces mean with Mean 
+* replaces every word starting with t with time 
+* replaces Gryo with Gyroscope 
+* replaces Mag with Magnitude 
+* replaces every word starting with f with Frequency 
+* replaces angle with Angle 
+* replaces Freq before a "." with Frequency 
+* replaces std with STD
+
+
+8.From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+* firstly changes the columns to numeric
+* tidydata table selects Subject, Activity and all columns containing mean, groups the columns by Subject and Activity, thereafter summarizes then by the mean of the every subject and activity. 
+*save the tidydata into a new table called tidydata.txt
+
+
+
+
+
+
+
+
+
+
